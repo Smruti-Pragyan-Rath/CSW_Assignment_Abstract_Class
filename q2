@@ -1,0 +1,87 @@
+abstract class Ecommerce {
+    int price;
+    int discount_percent;
+    boolean membership;
+    int quantity;
+
+    Ecommerce(int price) {
+        this.price = price;
+    }
+
+    Ecommerce(int price, int discount_percent) {
+        this.price = price;
+        this.discount_percent = discount_percent;
+    }
+
+    Ecommerce(int price, boolean membership, int discount_percent) {
+        this.price = price;
+        this.membership = membership;
+        this.discount_percent = discount_percent;
+    }
+
+    Ecommerce(int price, boolean membership, int discount_percent, int quantity) {
+        this.price = price;
+        this.membership = membership;
+        this.discount_percent = discount_percent;
+        this.quantity = quantity;
+    }
+
+    abstract void applyDiscount();
+}
+
+class NoDiscount extends Ecommerce {
+    NoDiscount(int price) {
+        super(price);
+    }
+
+    void applyDiscount() {
+        System.out.println("No discount");
+    }
+}
+
+class FlatDiscount extends Ecommerce {
+    FlatDiscount(int price, int discount_percent) {
+        super(price, discount_percent);
+    }
+
+    void applyDiscount() {
+        System.out.println("Flat Discount");
+    }
+}
+
+class PremiumDiscount extends Ecommerce {
+    PremiumDiscount(int price, boolean membership, int discount_percent) {
+        super(price, membership, discount_percent);
+    }
+
+    void applyDiscount() {
+        System.out.println("Discount for premium members");
+    }
+}
+
+class BOGO extends Ecommerce {
+    BOGO(int price, boolean membership, int discount_percent, int quantity) {
+        super(price, membership, discount_percent, quantity);
+    }
+
+    void applyDiscount() {
+        System.out.println("BOGO");
+    }
+}
+
+public class q2 {
+    public static void main(String[] args) {
+        Ecommerce noDiscount = new NoDiscount(23);
+        noDiscount.applyDiscount();
+
+        Ecommerce flatDiscount = new FlatDiscount(23, 4);
+        flatDiscount.applyDiscount();
+
+        Ecommerce premium = new PremiumDiscount(23, true, 3);
+        premium.applyDiscount();
+
+        Ecommerce bogo = new BOGO(23, true, 3, 45);
+        bogo.applyDiscount();
+    }
+}
+
