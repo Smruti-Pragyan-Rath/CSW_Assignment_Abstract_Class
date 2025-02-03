@@ -1,0 +1,52 @@
+abstract class HospitalBilling {
+
+    // 1. If only consultation fee is given, return the fee
+    double calculateBill(double consultationFee) {
+        return consultationFee;
+    }
+
+    // 2. If consultation fee and days of hospitalization are given, include room charges (₹2000/day)
+    double calculateBill(double consultationFee, int days) {
+        double roomCharges = days * 2000;
+        return consultationFee + roomCharges;
+    }
+
+    // 3. If consultation fee, days, and surgery charges are given, add surgery charges
+    double calculateBill(double consultationFee, int days, double surgeryCharges) {
+        double roomCharges = days * 2000;
+        return consultationFee + roomCharges + surgeryCharges;
+    }
+
+    // 4. If consultation fee, days, surgery charges, and insurance status are given, apply insurance discount
+    double calculateBill(double consultationFee, int days, double surgeryCharges, boolean hasInsurance) {
+        double roomCharges = days * 2000;
+        double totalBill = consultationFee + roomCharges + surgeryCharges;
+
+        // Apply a 20% discount if insurance is available
+        if (hasInsurance) {
+            totalBill *= 0.8; // 20% discount
+        }
+
+        return totalBill;
+    }
+}
+
+public class q6 {
+    public static void main(String[] args) {
+        // HospitalBilling billing = new HospitalBilling(); // This will now cause a compilation error since HospitalBilling is abstract.
+
+        // To use the HospitalBilling class, you need to create a concrete subclass.
+        // For example:
+        class ConcreteHospitalBilling extends HospitalBilling {
+            // You can add additional methods or override existing ones if needed.
+        }
+
+        ConcreteHospitalBilling billing = new ConcreteHospitalBilling();
+
+        // Example Calls
+        System.out.println("Total Bill (Consultation Only): ₹" + billing.calculateBill(500));
+        System.out.println("Total Bill (Consultation + 3 Days Hospitalization): ₹" + billing.calculateBill(500, 3));
+        System.out.println("Total Bill (Consultation + 3 Days + Surgery ₹50000): ₹" + billing.calculateBill(500, 3, 50000));
+        System.out.println("Total Bill (With Insurance): ₹" + billing.calculateBill(500, 3, 50000, true));
+    }
+}
