@@ -1,0 +1,54 @@
+abstract class SmartHome {
+
+    // 1. If device name is given, turn it ON/OFF
+    void control(String deviceName) {
+        System.out.println(deviceName + " is now turned ON/OFF.");
+    }
+
+    // 2. If device name and brightness (0-100%) are given, adjust brightness for a light
+    void control(String deviceName, int brightness) {
+        if (brightness < 0 || brightness > 100) {
+            System.out.println("Invalid brightness level! Must be between 0-100%.");
+            return;
+        }
+        System.out.println(deviceName + " brightness set to " + brightness + "%.");
+    }
+
+    // 3. If device name and temperature are given, adjust thermostat temperature
+    void control(String deviceName, double temperature) {
+        System.out.println(deviceName + " temperature set to " + temperature + "°C.");
+    }
+
+    // 4. If device name, brightness, and mode (Auto/Manual) are given, adjust light settings
+    void control(String deviceName, int brightness, String mode) {
+        if (!mode.equalsIgnoreCase("Auto") && !mode.equalsIgnoreCase("Manual")) {
+            System.out.println("Invalid mode! Use 'Auto' or 'Manual'.");
+            return;
+        }
+        if (brightness < 0 || brightness > 100) {
+            System.out.println("Invalid brightness level! Must be between 0-100%.");
+            return;
+        }
+        System.out.println(deviceName + " brightness set to " + brightness + "% in " + mode + " mode.");
+    }
+}
+
+public class q5 {
+    public static void main(String[] args) {
+        // SmartHome home = new SmartHome(); // This will now cause a compilation error since SmartHome is abstract.
+
+        // To use the SmartHome class, you would need to create a concrete subclass.
+        // For example:
+        class ConcreteSmartHome extends SmartHome {
+            // You can add additional methods or override existing ones if needed.
+        }
+
+        ConcreteSmartHome home = new ConcreteSmartHome();
+
+        // Example Calls
+        home.control("Fan"); // Turn ON/OFF device
+        home.control("Living Room Light", 75); // Adjust brightness
+        home.control("Thermostat", 22.5); // Adjust temperature
+        home.control("Bedroom Light", 50, "Auto"); // Adjust brightness in Auto mode
+    }
+}
