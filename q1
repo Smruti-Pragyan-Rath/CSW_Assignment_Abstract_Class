@@ -1,0 +1,43 @@
+class Bank {
+    int principal;
+    int interest;
+    int time;
+    int rate;
+    int amount;
+
+    // Savings Account: Default interest rate = 4%
+    Bank(int principal, int time) {
+        this.principal = principal;
+        this.time = time;
+        int defaultRate = 4;
+        System.out.println("Savings Account");
+        interest = (principal * defaultRate * time) / 100;
+        System.out.println("Interest is: " + interest);
+    }
+
+    // Fixed Deposit
+    Bank(int principal, int time, int rate) {
+        this.principal = principal;
+        this.time = time;
+        this.rate = rate;
+        System.out.println("Fixed Deposit");
+        interest = (principal * rate * time) / 100;
+        System.out.println("Interest is: " + interest);
+    }
+
+    // Recurring Deposit
+    Bank(double monthlyDeposit, int time, int rate) {
+        System.out.println("Recurring Deposit");
+        double totalMonths = time * 12; // Converting years to months
+        double interest = (monthlyDeposit * totalMonths * (totalMonths + 1) * rate) / (2 * 100 * 12);
+        System.out.println("Interest is: " + interest);
+    }
+}
+
+public class q1 {
+    public static void main(String[] args) {
+        Bank savings = new Bank(10000, 2);
+        Bank fixedDeposit = new Bank(20000, 3, 6);
+        Bank recurringDeposit = new Bank(5000, 2, 7);
+    }
+}
