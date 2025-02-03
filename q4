@@ -1,0 +1,66 @@
+abstract class Exam {
+    int marks;
+    int subject;
+    int passmarks;
+    String subjectdetails;
+
+    Exam(int marks) {
+        this.marks = marks;
+    }
+
+    Exam(int marks, int subject) {
+        this.marks = marks;
+        this.subject = subject;
+    }
+
+    Exam(int subject, int marks, int passmarks) {
+        this.passmarks = passmarks;
+        this.marks = marks;
+        this.subject = subject;
+    }
+
+    abstract void displayResult();
+}
+
+class MarksOnly extends Exam {
+    MarksOnly(int marks) {
+        super(marks);
+    }
+
+    void displayResult() {
+        System.out.println(marks);
+    }
+}
+
+class Percentage extends Exam {
+    Percentage(int marks, int subject) {
+        super(marks, subject);
+    }
+
+    void displayResult() {
+        System.out.println("Percentage");
+    }
+}
+
+class PassFail extends Exam {
+    PassFail(int subject, int marks, int passmarks) {
+        super(subject, marks, passmarks);
+    }
+
+    void displayResult() {
+        System.out.println("Pass/Fail");
+    }
+}
+
+public class q4 {
+    public static void main(String[] args) {
+        Exam exam1 = new MarksOnly(85);
+        exam1.displayResult();
+
+        Exam exam2 = new Percentage(85, 5);
+        exam2.displayResult();
+
+        Exam exam3 = new PassFail(5, 85, 40);
+        exam3.displayResult();
+    }
+}
